@@ -87,6 +87,10 @@ python3 test/test_simulation.py --validation_clean_dataset_path ./simulation_dat
 Furthermore you can add --verbose=True to save the triplets of clean_image, noisy_image, denoised_image with matplotlib.
 Following the same instructions you can validate the three different kernels for LIVE1 and Set5 datasets.
 
+## Acknowledgments
+
+This work was initiated as a project of our master's level course titled 'Deep Learning, Advanced Course' @ KTH Stockholm, Sweden. We would like to thank the course staff for providing us with the necessary Google Cloud tickets to run our experiments.
+
 [Paper]: https://arxiv.org/pdf/1908.11314v2.pdf
 [Github]: https://github.com/zsyOAOA/VDNet
 [SIDD Medium Dataset]: ftp://sidd_user:sidd_2018@130.63.97.225/SIDD_Medium_Srgb.zip
