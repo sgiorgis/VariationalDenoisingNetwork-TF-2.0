@@ -87,6 +87,26 @@ python3 test/test_simulation.py --validation_clean_dataset_path ./simulation_dat
 Furthermore you can add --verbose=True to save the triplets of clean_image, noisy_image, denoised_image with matplotlib.
 Following the same instructions you can validate the three different kernels for LIVE1 and Set5 datasets.
 
+## Experiments
+To showcase our work, we present our reproduction results on the Synthetic Non-I.I.D. Gaussian Noise.
+
+|Cases            | Dataset   | Original | Reproduction |
+|:----------------|:----------|:--------------| -----:|
+| Case1           | SET5      | 30.39         | 30.38 |
+|                 | LIVE1     | 29.22         | 29.28 |
+|                 | BSD68     | 29.02         | 29.03 |
+| Case2           | SET5      | 29.80         | 29.81 |
+|                 | LIVE1     | 28.82         | 28.88 |
+|                 | BSD68     | 28.67         | 28.69 |
+| Case3           | SET5      | 29.74         | 29.81 |
+|                 | LIVE1     | 28.65         | 28.70 |
+|                 | BSD68     | 28.46         | 28.49 |
+
+Once you have generated the synthetic noisy data in ./simulation_datasets, you can yield the same results using our pretrained model 
+found in ./pretrained_synthetic_model by running:
+```
+python3 test/test_simulation.py --validation_clean_dataset_path ./simulation_datasets/CBSD68_clean.hdf5 --validation_noisy_dataset_path ./simulation_datasets/CBSD68_case3.hdf5 --checkpoint_directory ./pretrained_synthetic_model
+```
 ## Acknowledgments
 
 This work was initiated as a project of our master's level course titled 'Deep Learning, Advanced Course' @ KTH Stockholm, Sweden. We would like to thank the course staff for providing us with the necessary Google Cloud tickets to run our experiments.
