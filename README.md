@@ -88,7 +88,7 @@ Furthermore you can add --verbose=True to save the triplets of clean_image, nois
 Following the same instructions you can validate the three different kernels for LIVE1 and Set5 datasets.
 
 ## Experiments
-To showcase our work, we present our reproduction results on the Synthetic Non-I.I.D. Gaussian Noise.
+To showcase our work, we present our reproduction PSNR(Peak signal-to-noise ratio) results on the Synthetic Non-I.I.D. Gaussian Noise.
 
 |Cases            | Dataset   | Original | Reproduction |
 |:----------------|:----------|:--------------| -----:|
