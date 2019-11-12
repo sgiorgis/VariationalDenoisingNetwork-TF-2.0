@@ -72,7 +72,8 @@ python3 datasets/generate_noise.py --mode=non-iid --data_directory=./simulation_
 
 This will generate the files CBSD68_clean.hdf5, CBSD68_case1.hdf5, CBSD68_case2.hdf5, CBSD68_case3.hdf5 for CBSD68 dataset.
 Same way it will generate the corresponding files for LIVE1 and Set5 as well.
-Cases correspond to different kernels as described in the [Paper].
+Cases correspond to different kernels as described in the [Paper] and are presented below.
+![alt test](./images/test4.png)
 
 You can validate the three different kernels and print the validation_mse, validation_psnr, validation_ssim for CBSD68 dataset with 
 ```
@@ -107,6 +108,12 @@ found in ./pretrained_synthetic_model by running:
 ```
 python3 test/test_simulation.py --validation_clean_dataset_path ./simulation_datasets/CBSD68_clean.hdf5 --validation_noisy_dataset_path ./simulation_datasets/CBSD68_case3.hdf5 --checkpoint_directory ./pretrained_synthetic_model
 ```
+
+Furthermore, we present qualitative results for the three different Non-IID Gauss Noise cases.
+![alt test](./images/test.png)
+![alt test](./images/test2.png)
+![alt test](./images/test3.png)
+
 ## Acknowledgments
 
 This work was initiated as a project of our master's level course titled 'Deep Learning, Advanced Course' @ KTH Stockholm, Sweden. We would like to thank the course staff for providing us with the necessary Google Cloud tickets to run our experiments.
