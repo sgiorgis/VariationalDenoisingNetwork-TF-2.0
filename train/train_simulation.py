@@ -1,4 +1,8 @@
 import os
+import sys
+
+sys.path.append(os.getcwd())
+
 from glob import glob
 import tensorflow as tf
 from tensorflow_core.python.keras.metrics import Mean

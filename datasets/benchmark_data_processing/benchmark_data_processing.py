@@ -1,4 +1,7 @@
 import os
+import sys
+
+sys.path.append(os.getcwd())
 
 import h5py as h5
 

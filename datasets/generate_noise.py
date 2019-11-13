@@ -1,5 +1,9 @@
-import glob
 import os
+import sys
+
+sys.path.append(os.getcwd())
+
+import glob
 import cv2
 import numpy as np
 import h5py as h5

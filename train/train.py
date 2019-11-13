@@ -1,4 +1,8 @@
 import os
+import sys
+
+sys.path.append(os.getcwd())
+
 import tensorflow as tf
 
 from glob import glob

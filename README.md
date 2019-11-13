@@ -5,12 +5,23 @@ Modeling and Removal" (NeurIPS 2019) in Tensorflow 2.0.
 
 [Github] | [Paper]
 
-### Prerequisites
+Installation
+------------
+Our projects uses the python packaging tool pipenv. 
 
-Our projects needs all requirements found in requirements.txt file. 
-You can download all the requirements using the command
+If you\'re on MacOS, you can install Pipenv easily with Homebrew:
+
+    $ brew install pipenv
+
+Or, if you\'re using Debian Buster+:
+
+    $ sudo apt install pipenv
+
+Otherwise, refer to the [documentation](https://pipenv.kennethreitz.org/en/latest/#install-pipenv-today) for instructions.
+
+Once you have downloaded pipenv, you can install all dependencies with 
 ```
-pip3 install -r requirements.txt
+pipenv install --dev
 ```
 
 ### Real-world image denoising task
@@ -22,19 +33,19 @@ For validation you need to download the [Noisy sRGB data] and the [Ground-truth 
 #### Validation data preprocessing
 You need to preprocess the validation data as our model needs hdf5 files instead of mat files.
 ```
-python3 datasets/validation_data_processing/validation_data_processing.py --data_directory ./benchmark_datasets --clean_mat_file ValidationGtBlocksSrgb.mat --noisy_mat_file ValidationNoisyBlocksSrgb.mat
+pipenv run python datasets/validation_data_processing/validation_data_processing.py --data_directory ./benchmark_datasets --clean_mat_file ValidationGtBlocksSrgb.mat --noisy_mat_file ValidationNoisyBlocksSrgb.mat
 ```
 This will generate the files ./datasets/ValidationGtBlocksSrgb.hdf5 and ./benchmark_datasets/ValidationNoisyBlocksSrgb.hdf5 
 that will be used for validation. 
 
 #### Train
 ```
-python3 train/train.py --train_dataset_base_path ./benchmark_datasets/SIDD_Medium_Srgb --validation_clean_dataset_path ./benchmark_datasets/ValidationGtBlocksSrgb.hdf5 --validation_noisy_dataset_path  ./benchmark_datasets/ValidationNoisyBlocksSrgb.hdf5 --batches 5000 --batch_size 64 --checkpoint_directory ./benchmark_checkpoints
+pipenv run python train/train.py --train_dataset_base_path ./benchmark_datasets/SIDD_Medium_Srgb --validation_clean_dataset_path ./benchmark_datasets/ValidationGtBlocksSrgb.hdf5 --validation_noisy_dataset_path  ./benchmark_datasets/ValidationNoisyBlocksSrgb.hdf5 --batches 5000 --batch_size 64 --checkpoint_directory ./benchmark_checkpoints
 ```
 #### Validation
 You can validate pre trained models or validate your trained model stored in checkpoints directory with
 ```
-python3 test/test.py --validation_clean_dataset_path ./benchmark_datasets/ValidationGtBlocksSrgb.hdf5 --validation_noisy_dataset_path  ./benchmark_datasets/ValidationNoisyBlocksSrgb.hdf5 --batches 5000 --batch_size 64 --checkpoint_directory ./benchmark_checkpoints
+pipenv run python test/test.py --validation_clean_dataset_path ./benchmark_datasets/ValidationGtBlocksSrgb.hdf5 --validation_noisy_dataset_path  ./benchmark_datasets/ValidationNoisyBlocksSrgb.hdf5 --batches 5000 --batch_size 64 --checkpoint_directory ./benchmark_checkpoints
 ```
 #### Benchmark
 To validate pre trained models or validate your trained model stored in checkpoints directory
@@ -42,7 +53,7 @@ to the official [Benchmark Noisy sRGB data] you need to download the data from t
 and move it to the ./benchmark_datasets folder
 Then you can generate the denoised results that you need to upload to the website with
 ```
-python3 test/test_benchmark.py  --noisy_mat_file ./benchmark_datasets/BenchmarkNoisyBlocksSrgb.mat --checkpoint_directory ./benchmark_checkpoints
+pipenv run python test/test_benchmark.py  --noisy_mat_file ./benchmark_datasets/BenchmarkNoisyBlocksSrgb.mat --checkpoint_directory ./benchmark_checkpoints
 ```
 This will generate the ./benchmark_datasets/SubmitSrgb.mat file contaiing the denoised images following the 
 same structure as the ./benchmark_datasets/BenchmarkNoisyBlocksSrgb.mat file.
@@ -55,19 +66,19 @@ Therefore you need to first train the whole network and then validate on the val
 You need follow the instruction to download [Waterloo Exploration Database], CBSD432 and the CImageNet400 in [Github].
 You need to download the datasets in ./simulation_datasets. 
 ```
-python3 train/train_simulation.py --train_dataset_base_path ./simulation_datasets --batches 5000 --batch_size 64 --checkpoint_directory ./simulation_checkpoints
+pipenv run python train/train_simulation.py --train_dataset_base_path ./simulation_datasets --batches 5000 --batch_size 64 --checkpoint_directory ./simulation_checkpoints
 ```
 #### Validation
 For validation you need to download the LIVE1, Set5 and the CBSD68 datasets. You can follow the instruction here [Github].
 These are clean images so in order to add synthetic Non-IID Gaussian noise with different kernels, you need to run
 ```
-python3 datasets/generate_noise.py --mode=non-iid --data_directory=./simulation_datasets --data_name=LIVE1 --extension=bmp
+pipenv run python datasets/generate_noise.py --mode=non-iid --data_directory=./simulation_datasets --data_name=LIVE1 --extension=bmp
 ```
 ```
-python3 datasets/generate_noise.py --mode=non-iid --data_directory=./simulation_datasets --data_name=Set5 --extension=bmp
+pipenv run python datasets/generate_noise.py --mode=non-iid --data_directory=./simulation_datasets --data_name=Set5 --extension=bmp
 ```
 ```
-python3 datasets/generate_noise.py --mode=non-iid --data_directory=./simulation_datasets --data_name=CBSD68 --extension=png
+pipenv run python datasets/generate_noise.py --mode=non-iid --data_directory=./simulation_datasets --data_name=CBSD68 --extension=png
 ```
 
 This will generate the files CBSD68_clean.hdf5, CBSD68_case1.hdf5, CBSD68_case2.hdf5, CBSD68_case3.hdf5 for CBSD68 dataset.
@@ -77,13 +88,13 @@ Cases correspond to different kernels as described in the [Paper] and are presen
 
 You can validate the three different kernels and print the validation_mse, validation_psnr, validation_ssim for CBSD68 dataset with 
 ```
-python3 test/test_simulation.py --validation_clean_dataset_path ./simulation_datasets/CBSD68_clean.hdf5 --validation_noisy_dataset_path ./simulation_datasets/CBSD68_case1.hdf5 --checkpoint_directory ./simulation_checkpoints
+pipenv run python test/test_simulation.py --validation_clean_dataset_path ./simulation_datasets/CBSD68_clean.hdf5 --validation_noisy_dataset_path ./simulation_datasets/CBSD68_case1.hdf5 --checkpoint_directory ./simulation_checkpoints
 ```
 ```
-python3 test/test_simulation.py --validation_clean_dataset_path ./simulation_datasets/CBSD68_clean.hdf5 --validation_noisy_dataset_path ./simulation_datasets/CBSD68_case2.hdf5 --checkpoint_directory ./simulation_checkpoints
+pipenv run python test/test_simulation.py --validation_clean_dataset_path ./simulation_datasets/CBSD68_clean.hdf5 --validation_noisy_dataset_path ./simulation_datasets/CBSD68_case2.hdf5 --checkpoint_directory ./simulation_checkpoints
 ```
 ```
-python3 test/test_simulation.py --validation_clean_dataset_path ./simulation_datasets/CBSD68_clean.hdf5 --validation_noisy_dataset_path ./simulation_datasets/CBSD68_case3.hdf5 --checkpoint_directory ./simulation_checkpoints
+pipenv run python test/test_simulation.py --validation_clean_dataset_path ./simulation_datasets/CBSD68_clean.hdf5 --validation_noisy_dataset_path ./simulation_datasets/CBSD68_case3.hdf5 --checkpoint_directory ./simulation_checkpoints
 ```
 Furthermore you can add --verbose=True to save the triplets of clean_image, noisy_image, denoised_image with matplotlib.
 Following the same instructions you can validate the three different kernels for LIVE1 and Set5 datasets.
@@ -106,7 +117,7 @@ To showcase our work, we present our reproduction PSNR(Peak signal-to-noise rati
 Once you have generated the synthetic noisy data in ./simulation_datasets, you can yield the same results using our pretrained model 
 found in ./pretrained_synthetic_model by running:
 ```
-python3 test/test_simulation.py --validation_clean_dataset_path ./simulation_datasets/CBSD68_clean.hdf5 --validation_noisy_dataset_path ./simulation_datasets/CBSD68_case3.hdf5 --checkpoint_directory ./pretrained_synthetic_model
+pipenv run python test/test_simulation.py --validation_clean_dataset_path ./simulation_datasets/CBSD68_clean.hdf5 --validation_noisy_dataset_path ./simulation_datasets/CBSD68_case3.hdf5 --checkpoint_directory ./pretrained_synthetic_model
 ```
 
 Furthermore, we present qualitative results for the three different Non-IID Gauss Noise cases.
