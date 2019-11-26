@@ -114,6 +114,20 @@ To showcase our work, we present our reproduction PSNR(Peak signal-to-noise rati
 |                 | LIVE1     | 28.65         | 28.70 |
 |                 | BSD68     | 28.46         | 28.49 |
 
+PSNR(Peak signal-to-noise ratio) results on the Synthetic I.I.D. Gaussian Noise.
+
+|Sigma           | Dataset   | Original | Reproduction |
+|:---------------|:----------|:--------------| -----:|
+| sigma=15       | SET5      | 34.34         | 34.38 |
+|                | LIVE1     | 33.94         | 34.02 |
+|                | BSD68     | 33.90         | 33.94 |
+| sigma=25       | SET5      | 32.24         | 32.43 |
+|                | LIVE1     | 31.50         | 31.58 |
+|                | BSD68     | 31.35         | 31.38 |
+| sigma=50       | SET5      | 29.47         | 29.49 |
+|                | LIVE1     | 28.36         | 28.42 |
+|                | BSD68     | 28.19         | 28.21 |
+
 Once you have generated the synthetic noisy data in ./simulation_datasets, you can yield the same results using our pretrained model 
 found in ./pretrained_synthetic_model by running:
 ```
