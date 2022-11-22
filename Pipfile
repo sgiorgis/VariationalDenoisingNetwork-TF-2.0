@@ -50,7 +50,7 @@ Cycler = "==0.10.0"
 Keras-Applications = "==1.0.8"
 Keras-Preprocessing = "==1.1.0"
 Markdown = "==3.1.1"
-Pillow = "==6.2.1"
+Pillow = "==9.3.0"
 PyWavelets = "==1.1.1"
 Werkzeug = "==0.16.0"
 
